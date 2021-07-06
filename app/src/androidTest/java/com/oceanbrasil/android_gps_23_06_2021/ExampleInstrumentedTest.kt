@@ -1,4 +1,4 @@
-package br.com.oceanbrasil.android_gps_23_06_21
+package com.oceanbrasil.android_gps_23_06_2021
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("br.com.oceanbrasil.android_gps_23_06_21", appContext.packageName)
+        assertEquals("com.oceanbrasil.android_gps_23_06_2021", appContext.packageName)
     }
 }

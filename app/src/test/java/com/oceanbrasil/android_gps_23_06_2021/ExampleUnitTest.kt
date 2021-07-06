@@ -1,4 +1,4 @@
-package br.com.oceanbrasil.android_gps_23_06_21
+package com.oceanbrasil.android_gps_23_06_2021
 
 import org.junit.Test
 

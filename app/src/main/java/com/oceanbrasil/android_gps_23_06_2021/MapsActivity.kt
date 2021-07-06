@@ -3,17 +3,18 @@ package com.oceanbrasil.android_gps_23_06_2021
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import br.com.oceanbrasil.android_gps_23_06_21.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -47,14 +48,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         // Add a marker in Sydney and move the camera
-        val saoPaulo = LatLng(-23.59284516630147, -46.67206405699086)
-        mMap.addMarker(MarkerOptions().position(saoPaulo).title("Marca em São Paulo"))
+        val saoPaulo = LatLng(-23.4714758, -46.7557334)
+        mMap.addMarker(MarkerOptions().position(saoPaulo).title("Marca em Cond. Reserva Jaraguá"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(saoPaulo, 18f))
 
         iniciarLocalizacao()
     }
 
     private fun iniciarLocalizacao() {
+        // Checar se temos a permissão FINE ou COARSE concedida
+        // Se não tiver, entrará no if
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -63,6 +66,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
+            // Assim que entrar no if, solicita as permissões
             ActivityCompat.requestPermissions(
                 this, arrayOf(
                     Manifest.permission.ACCESS_FINE_LOCATION,
@@ -70,6 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 ), LOCATION_PERMISSION_REQUEST_CODE
             )
 
+            // Encerra execução do método
             return
         }
 
@@ -85,5 +90,51 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             Toast.LENGTH_LONG
         ).show()
 
+        ultimaLocalizacao?.let {
+            val latLng = LatLng(it.latitude, it.longitude)
+
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(latLng)
+                    .title("Minha posição")
+            )
+
+            mMap.animateCamera(
+                CameraUpdateFactory
+                    .newLatLngZoom(latLng, 18f)
+            )
+
+            mMap.addCircle(
+                CircleOptions()
+                    .center(latLng)
+                    .radius(50.0)
+                    .strokeColor(Color.RED)
+                    .fillColor(Color.BLUE)
+            )
+
+            // Outras funções para desenhar no mapa (consulte documentação)
+//            mMap.addPolygon()
+//            mMap.addPolyline()
+//            mMap.addMarker()
+//            mMap.addTileOverlay()
+//            mMap.addGroundOverlay()
+        }
+
+        // Exemplo do Toast:
+//        Toast.makeText(this, "Texto que irá aparecer", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE
+            && grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
+            iniciarLocalizacao()
+        }
     }
 }
