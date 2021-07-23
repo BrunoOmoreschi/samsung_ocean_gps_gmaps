@@ -1,4 +1,4 @@
-![header](D:\Programation\socean\samsung_ocean_gps_gmaps\header.png)
+![header](https://github.com/BrunoOmoreshi/samsung_ocean_gps_gmaps/blob/main/header.png)
 
 # Android: GPS com Google Maps
 
@@ -22,12 +22,12 @@ Para saber mais sobre o Google Maps para android e ter um tutorial veja:  https:
 
 Link para geração da chave da API: https://console.cloud.google.com/marketplace
 
-![ProjetoCriado](D:\Programation\socean\samsung_ocean_gps_gmaps\ProjetoCriado.png)
+![ProjetoCriado](https://github.com/BrunoOmoreshi/samsung_ocean_gps_gmaps/blob/main/ProjetoCriado.png)
 
 Pedindo permissão:
 
-![permissions](D:\Programation\socean\samsung_ocean_gps_gmaps\permissions.png)
+![permissions](https://github.com/BrunoOmoreshi/samsung_ocean_gps_gmaps/blob/main/permissions.png)
 
 Mostrando o mapa:
 
-![map](D:\Programation\socean\samsung_ocean_gps_gmaps\map.png)
+![map](https://github.com/BrunoOmoreshi/samsung_ocean_gps_gmaps/blob/main/map.png)
